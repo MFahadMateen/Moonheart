@@ -6,20 +6,8 @@ class UserModel {
      var userId: String? = null
      var age: String? = null
      var image: String? = null
+     var cover: String? = null
 
     constructor()
-    constructor(
-        name: String?,
-        email: String?,
-        userId: String?,
-        age: String?,
-        image: String?
-    ) {
-        this.name = name
-        this.email = email
-        this.userId = userId
-        this.age = age
-        this.image = image
-    }
 
 }

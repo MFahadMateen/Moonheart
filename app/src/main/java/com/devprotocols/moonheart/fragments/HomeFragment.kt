@@ -54,10 +54,11 @@ class HomeFragment : Fragment() {
         FirebaseDatabase.getInstance().getReference(Constants.users).child(mAuth.uid.toString()).addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
                 val user = snapshot.getValue(UserModel::class.java)
-                binding.txtName.text = user?.name
-                binding.txtEmail.text = user?.email
-                binding.txtAge.text = user?.age
+                binding.etName.setText(user?.name)
+                binding.etEmail.setText(user?.email)
+                binding.etAge.setText(user?.age)
                 Glide.with(requireContext()).load(user?.image).placeholder(R.drawable.placeholder).into(binding.imgProfile)
+                Glide.with(requireContext()).load(user?.cover).placeholder(R.drawable.cover).into(binding.imgCover)
                 dialog.dismiss()
             }
 

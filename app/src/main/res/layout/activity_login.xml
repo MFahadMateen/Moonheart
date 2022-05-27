@@ -6,17 +6,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".activities.LoginActivity">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <ImageView
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:text="@string/logo"
-        android:textColor="@color/blue"
-        android:textSize="32sp"
+        android:src="@drawable/logo"
         app:layout_constraintBottom_toTopOf="@+id/textInputLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/blue"
+        android:contentDescription="@string/image" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"

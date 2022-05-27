@@ -1,33 +1,34 @@
 {
   "project_info": {
-    "project_number": "630071160948",
-    "project_id": "moonheart-defd6",
-    "storage_bucket": "moonheart-defd6.appspot.com"
+    "project_number": "938058989795",
+    "firebase_url": "https://moonheart-17a9d-default-rtdb.firebaseio.com",
+    "project_id": "moonheart-17a9d",
+    "storage_bucket": "moonheart-17a9d.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:630071160948:android:6d652068b1b2df91b66121",
+        "mobilesdk_app_id": "1:938058989795:android:940c121113c1006e3645d6",
         "android_client_info": {
           "package_name": "com.devprotocols.moonheart"
         }
       },
       "oauth_client": [
         {
-          "client_id": "630071160948-8qvvi122jic7uau4hstvug06pkmeshuo.apps.googleusercontent.com",
+          "client_id": "938058989795-ekjsjdjd0s1uh4vq4f13eqkua31n1ni8.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyA5Wz8QXiXxGpEidWyFkjYWaLoU_NFOGIc"
+          "current_key": "AIzaSyBSkdwujBLNosc97FYtKC353VXKtsf1YiY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "630071160948-8qvvi122jic7uau4hstvug06pkmeshuo.apps.googleusercontent.com",
+              "client_id": "938058989795-ekjsjdjd0s1uh4vq4f13eqkua31n1ni8.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

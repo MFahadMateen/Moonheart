@@ -27,6 +27,7 @@ class EditProfileActivity : AppCompatActivity() {
     private lateinit var dialog: KProgressHUD
     private lateinit var mAuth: FirebaseAuth
     private var uri: Uri? = null
+    private var isCover: Boolean = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityEditProfileBinding.inflate(layoutInflater)
@@ -45,7 +46,10 @@ class EditProfileActivity : AppCompatActivity() {
                     binding.etName.setText(user?.name)
                     binding.etEmail.setText(user?.email)
                     binding.etAge.setText(user?.age)
-                    Glide.with(this@EditProfileActivity).load(user?.image).placeholder(R.drawable.placeholder).into(binding.imgProfile)
+                    Glide.with(this@EditProfileActivity).load(user?.image)
+                        .placeholder(R.drawable.placeholder).into(binding.imgProfile)
+                    Glide.with(this@EditProfileActivity).load(user?.cover)
+                        .placeholder(R.drawable.cover).into(binding.imgCover)
                     dialog.dismiss()
                 }
 
@@ -65,7 +69,12 @@ class EditProfileActivity : AppCompatActivity() {
         }
         binding.imgEdit.setOnClickListener {
             chooseImage()
+            isCover = false
 
+        }
+        binding.editCover.setOnClickListener {
+            chooseImage()
+            isCover = true
         }
     }
 
@@ -115,19 +124,24 @@ class EditProfileActivity : AppCompatActivity() {
             if (result.resultCode == Activity.RESULT_OK) {
                 val data: Intent? = result.data
                 uri = data!!.getParcelableExtra("path")
-                Glide.with(this@EditProfileActivity).load(uri).into(binding.imgProfile)
+                Glide.with(this@EditProfileActivity).load(uri)
+                    .into(if (isCover) binding.imgCover else binding.imgProfile)
                 uploadImageToServer()
             }
         }
 
     private fun uploadImageToServer() {
         dialog.show()
-        val ref = FirebaseStorage.getInstance().getReference("users")
+        val ref = FirebaseStorage.getInstance()
+            .getReference(if (isCover) Constants.cover else Constants.profile)
             .child(mAuth.uid.toString() + "." + BaseUtils.getFileExtension(uri!!, this))
         ref.putFile(uri!!).addOnSuccessListener {
             ref.downloadUrl.addOnSuccessListener {
                 val hashMap = HashMap<String, Any>()
-                hashMap["image"] = it.toString()
+                if (isCover)
+                    hashMap["cover"] = it.toString()
+                else
+                    hashMap["image"] = it.toString()
                 FirebaseDatabase.getInstance().getReference(Constants.users)
                     .child(mAuth.uid.toString())
                     .updateChildren(hashMap).addOnSuccessListener {
@@ -143,7 +157,6 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     private fun updateData() {
-
         val hashMap = HashMap<String, Any>()
         hashMap["name"] = binding.etName.text.toString()
         hashMap["age"] = binding.etAge.text.toString()

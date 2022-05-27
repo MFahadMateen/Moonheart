@@ -45,6 +45,8 @@ class UserProfileActivity : AppCompatActivity() {
                         binding.txtAge.text = user.age
                         Glide.with(this@UserProfileActivity).load(user.image).placeholder(R.drawable.placeholder)
                             .into(binding.imgProfile)
+                        Glide.with(this@UserProfileActivity).load(user.cover).placeholder(R.drawable.cover)
+                            .into(binding.imgCover)
                         dialog.dismiss()
                     }
 
