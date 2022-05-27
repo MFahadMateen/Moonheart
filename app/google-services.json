@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "630071160948",
+    "project_id": "moonheart-defd6",
+    "storage_bucket": "moonheart-defd6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:630071160948:android:6d652068b1b2df91b66121",
+        "android_client_info": {
+          "package_name": "com.devprotocols.moonheart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "630071160948-8qvvi122jic7uau4hstvug06pkmeshuo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA5Wz8QXiXxGpEidWyFkjYWaLoU_NFOGIc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "630071160948-8qvvi122jic7uau4hstvug06pkmeshuo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
