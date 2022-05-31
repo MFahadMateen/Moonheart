@@ -57,6 +57,11 @@ class InboxFragment : Fragment() {
                             chatList.add(chatModel)
                         }
                     }
+                    if (chatList.size > 0)
+                        binding.animationView.visibility = View.GONE
+                    else
+                        binding.animationView.visibility = View.VISIBLE
+
                     chatList.sortByDescending { it.timestamp }
                     inboxAdapter.setList(chatList)
                     dialog.dismiss()

@@ -69,8 +69,8 @@ class UserProfileActivity : AppCompatActivity() {
         binding.btnChat.setOnClickListener {
             val intent = Intent(this, ChatActivity::class.java)
             intent.putExtra("userId", userId)
-            intent.putExtra("name", user.name)
-            intent.putExtra("image", user.image)
+//            intent.putExtra("name", user.name)
+//            intent.putExtra("image", user.image)
             startActivity(intent)
         }
     }

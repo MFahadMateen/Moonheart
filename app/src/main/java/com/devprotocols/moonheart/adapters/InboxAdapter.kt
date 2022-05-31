@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.devprotocols.moonheart.R
@@ -22,7 +23,6 @@ import com.google.firebase.database.ValueEventListener
 class InboxAdapter(var context: Context) :
     RecyclerView.Adapter<InboxAdapter.ViewHolder>() {
     private var chatModelList = ArrayList<ChatModel>()
-    private var otherUser = UserModel()
 
     inner class ViewHolder(val binding: RvInboxItemBinding) :
         RecyclerView.ViewHolder(binding.root)
@@ -40,6 +40,7 @@ class InboxAdapter(var context: Context) :
                 binding.txtLastMessage.text = this.lastMessage
                 val otherPersonId =
                     if (this.members!![0] == FirebaseAuth.getInstance().uid) this.members!![1] else this.members!![0]
+                var otherUser = UserModel()
                 FirebaseDatabase.getInstance().getReference(Constants.users).child(otherPersonId)
                     .addListenerForSingleValueEvent(
                         object : ValueEventListener {
