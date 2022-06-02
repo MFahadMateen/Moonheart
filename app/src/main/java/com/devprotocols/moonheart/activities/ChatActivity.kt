@@ -45,7 +45,8 @@ class ChatActivity : AppCompatActivity() {
         messageAdapter = MessageAdapter(this)
         binding.rvMessages.adapter = messageAdapter
         binding.txtName.text = otherPersonsName
-        Glide.with(this).load(otherPersonsImage).placeholder(R.drawable.placeholder).into(binding.imgProfile)
+        Glide.with(this).load(otherPersonsImage).placeholder(R.drawable.placeholder)
+            .into(binding.imgProfile)
     }
 
     private fun checkIfChatRoomExists() {
@@ -76,22 +77,23 @@ class ChatActivity : AppCompatActivity() {
     private fun getAllMessages() {
         FirebaseDatabase.getInstance().getReference(Constants.chats).child(chatId!!)
             .child(Constants.messages).addValueEventListener(
-            object : ValueEventListener {
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    messageList = ArrayList()
-                    for (ds in snapshot.children) {
-                        val messageModel = ds.getValue(MessageModel::class.java)
-                        messageList.add(messageModel!!)
+                object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        messageList = ArrayList()
+                        for (ds in snapshot.children) {
+                            val messageModel = ds.getValue(MessageModel::class.java)
+                            messageList.add(messageModel!!)
+                        }
+                        messageList.sortBy { it.time }
+                        messageAdapter.setList(messageList)
+                        binding.rvMessages.scrollToPosition(messageAdapter.itemCount - 1)
                     }
-                    messageAdapter.setList(messageList)
-                    binding.rvMessages.scrollToPosition(messageAdapter.itemCount - 1)
-                }
 
-                override fun onCancelled(error: DatabaseError) {
-                }
+                    override fun onCancelled(error: DatabaseError) {
+                    }
 
-            }
-        )
+                }
+            )
     }
 
     private fun initClickListener() {
@@ -99,7 +101,10 @@ class ChatActivity : AppCompatActivity() {
             finish()
         }
         binding.imgSend.setOnClickListener {
-            sendMessage()
+            if (binding.etMessage.text.isNullOrEmpty())
+                binding.etMessage.error = "Enter your message!"
+            else
+                sendMessage()
         }
     }
 
@@ -132,7 +137,7 @@ class ChatActivity : AppCompatActivity() {
                 mAuth.uid.toString(),
                 System.currentTimeMillis()
             )
-            val chatModel = ChatModel(chatId, message,System.currentTimeMillis(), members)
+            val chatModel = ChatModel(chatId, message, System.currentTimeMillis(), members)
             ref.setValue(chatModel)
             messageRef.setValue(messageModel)
             getAllMessages()
